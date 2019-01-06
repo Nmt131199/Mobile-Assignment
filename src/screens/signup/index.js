@@ -1,142 +1,136 @@
-import React, { Component } from "react";
-import { ImageBackground, View, StatusBar,SafeAreaView,TextInput,TouchableOpacity,Alert } from "react-native";
-import { Container, Button, H3, Text, Toast } from "native-base";
+import React from 'react';
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ImageBackground,
+  Dimensions,
+  Alert,
+  SafeAreaView
+} from 'react-native';
 
-import styles from "./styles";
-import { Ionicons } from '@expo/vector-icons';
+import { Form, Input, Item , Label} from 'native-base';
 
-const launchscreenBg = require("../../../assets/launchscreen-bg.png");
-const launchscreenLogo = require("../../../assets/logo-kitchen-sink.png");
+const bgImage = require("../../../assets/background.png");
+//const bgImage = require("./images/background.png");
+const { width: WIDTH } = Dimensions.get('window');
 
-class Home extends Component {
-  constructor() {
-    super()
-    this.state = {
-      username: '',
-      password: '',
-      showPassWord: true,
-      press: false
-    }
-  }
- 
-  // hide/display the visibility of the password
-  showPass = () => {
-    if (this.state.press == false) {
-      this.setState({ showPassWord: false, press: true })
-    }
-    else {
-      this.setState({ showPassWord: true, press: false })
-    }
-  }
- 
-  //check the valid username + password to acquire accessibility
-  verifyLogin = () => {
-    if(this.state.username == 'Admin' && this.state.password == '1'){
-      Toast.show({
-        text: 'Welcome back ' + this.state.username,
-        buttonText: "Ok",
-        type: "success",duration: 2000
-      })
-      this.props.navigation.navigate("TodoList")
-    }
-    else if(this.state.username == '' && this.state.password == ''){
-      Toast.show({
-                text: "Please enter correct username/password",
-                buttonText: "Ok",
-                type: "danger",
-                
 
-              })
-    }
-    else{
-      Toast.show({
-                text: "Wrong username/password!",
-                buttonText: "Ok",
-                type: "danger"
-              })
-    }
-  }
+class SignUp extends React.Component {
   render() {
     return (
-      <Container>
-        <StatusBar barStyle="light-content" />
-        <ImageBackground source={launchscreenBg} style={styles.imageContainer}>
-          <View style={styles.logoContainer}>
-            <ImageBackground source={launchscreenLogo} style={styles.logo} />
-          </View>
-          <View
-            style={{
-              alignItems: "center",
-              marginBottom: 50,
-              backgroundColor: "transparent"
-            }}
-          >
-            <SafeAreaView>
-         <Ionicons name="ios-person" size={28}
-           style={styles.inputIcon} color={'rgba(255, 255, 255, 0.7)'} />
-         <TextInput
-           value={this.state.username}
-           onChangeText={(s) => this.setState({ username: s })}
-           style={styles.input}
-           placeholder={'Username'}
-           placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
-           underlineColorAndroid='transparent' />
-       </SafeAreaView>
-            <View style={{ marginTop: 8 }} />
-            <SafeAreaView>
-         <Ionicons name="ios-lock" size={28} color={'rgba(255, 255, 255, 0.7)'}
-           style={styles.inputIcon} />
-         <TextInput
-         value={this.state.password}
-         onChangeText={(s) => this.setState({ password: s })}
-           style={styles.input}
-           //this will evaluate the state "showPassWord"
-           secureTextEntry={this.state.showPassWord}
-           placeholder={'Password'}
-           placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
-           underlineColorAndroid='transparent' />
+      <ImageBackground
+        source={bgImage}
+        style={styles.backgroundContainer}>
+        <Text style={styles.headline}>Sign Up</Text>
+        <View style={styles.inputContainer}>
+          <Form>
+            <Item stackedLabel>
+              <Label>Fullname</Label>
+              <Input />
+            </Item>
+            <Item stackedLabel>
+              <Label>Email</Label>
+              <Input textContentType='emailAddress'/>
+            </Item>
+            <Item stackedLabel>
+              <Label>Phone number</Label>
+              <Input keyboardType= 'numeric'/>
+            </Item>
+            <Item stackedLabel>
+              <Label>Username</Label>
+              <Input />
+            </Item>
+            <Item stackedLabel last>
+              <Label>Password</Label>
+              <Input />
+            </Item>
+          </Form>
+        </View>
 
-         <TouchableOpacity style={styles.btnShowPass}
-           //when press on the eye icon, the showPass function will be executed
-           onPress={this.showPass.bind(this)}>
-           <Ionicons name={this.state.press == false ? "ios-eye" : 'ios-eye-off'} size={26} color={'rgba(255, 255, 255, 0.7)'} />
+        <TouchableOpacity style={styles.btnSignup}>
+          <Text style={styles.textSignUp}>Sign Up</Text>
+        </TouchableOpacity>
+        <View style={{ flex: 1, flexDirection: 'row', height: 100 }}>
+          <Text style={styles.signUpText}>
+            Already had an account ?
+          </Text>
+          <TouchableOpacity style={styles.btnLogin}>
+            <Text style={styles.textLogin}
+             onPress={() => this.props.navigation.navigate("Login")}
+            >Login</Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
 
-         </TouchableOpacity>
-       </SafeAreaView>
-            <View style={{ marginTop: 8 }} />
-          </View>
-          <View style={{ marginBottom: 50}}>
-            <Button 
-              style={{ backgroundColor: "#6FAF98", alignSelf: "center" }}
-              onPress={this.verifyLogin.bind(this)}
-            >
-              <Text>Login</Text>
-            </Button>
-            <Button 
-              style={{ backgroundColor: "#6FAF98", alignSelf: "center",marginTop: 20 }}
-              // onPress={() => this.props.navigation.navigate("TodoList")}
-              onPress={() => Toast.show({
-                text: "Under maintainance",
-                buttonText: "Ok",
-                type: "warning"
-              })}
-            >
-            
-              <Text>Sign up</Text>
-            </Button>
-            <Button 
-              style={{ backgroundColor: "#6FAF98", alignSelf: "center",marginTop: 20 }}
-              onPress={() => this.props.navigation.navigate("TodoList")}
-              // onPress={() => Alert.alert("Under development")}
-            >
-              <Text>Test Login</Text>
-            </Button>
 
-          </View>
-        </ImageBackground>
-      </Container>
+
+
     );
   }
 }
+export default SignUp;
 
-export default Home;
+const styles = StyleSheet.create({
+  backgroundContainer: {
+    flex: 1,
+    width: '100%',
+    height: '100%'
+  },
+  headline: {
+    color: 'white',
+    fontSize: 50,
+    fontWeight: '500',
+    marginTop: 30,
+    marginLeft: 30,
+    opacity: 0.5
+  },
+  inputContainer: {
+    margin: 30,
+    padding: 15,
+    alignSelf: 'stretch',
+    borderWidth: 1,
+    borderColor: '#fff',
+    backgroundColor: 'rgba(255,255,255,0.2)',
+  },
+  btnSignup:{
+    width: WIDTH - 110,
+    height: 45,
+    borderRadius: 25,
+
+    backgroundColor: '#ff8c66',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: 5,
+    marginBottom: 10
+  },
+  btnLogin: {
+    width: WIDTH - 350,
+    height: 20,
+    borderRadius: 25,
+    
+    justifyContent: 'center',
+    marginTop: 5
+  },
+  textSignUp: {
+    color: 'rgba(255, 255, 255, 0.7)',
+    fontSize: 16,
+    textAlign: 'center'
+  },
+  textLogin: {
+    color: 'rgb(102, 204, 255)',
+    fontSize: 16,
+    textAlign: 'center'
+  },
+  signUpText: {
+    color: 'rgba(255, 255, 255, 0.7)',
+    fontSize: 16,
+    marginRight: 10,
+    marginLeft: 80,
+    marginTop: 5
+  }
+
+});
