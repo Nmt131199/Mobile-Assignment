@@ -16,24 +16,29 @@ import {
   View
 } from "native-base";
 import styles from "./styles";
+import {ImageBackground} from "react-native";
 
-const logo = require("../../../assets/splashscreen.png");
-const cover = require("../../../assets/web-cover1.jpg");
+const logo1 = require("../../../assets/triet_icon.jpg");
+const logo2 = require("../../../assets/robert_icon.jpg");
+const logo3 = require("../../../assets/hau_icon.jpg");
+
+const cover = require("../../../assets/AboutUsCover.png");
+const background= require("../../../assets/bg4.jpg");
 const datas = [
   {
-    img: logo,
+    img: logo1,
     text: "Nguyen Manh Triet",
-    note: "Its time to build a difference . ."
+    note: "Its time to build a difference"
   },
   {
-    img: logo,
+    img: logo2,
     text: "Robert Dooley",
-    note: "One needs courage to be happy and smiling all time . . "
+    note: "One needs courage to be happy and smiling all time"
   },
   {
-    img: logo,
+    img: logo3,
     text: "Duong Cong Hau",
-    note: "Time changes everything . ."
+    note: "Time changes everything"
   }];
 
 class AboutUs extends Component {
@@ -47,36 +52,37 @@ class AboutUs extends Component {
               transparent
               onPress={() => this.props.navigation.navigate("DrawerOpen")}
             >
-              <Icon name="menu" />
+              <Icon name="ios-menu" />
             </Button>
           </Left>
           <Body>
-            <Title>About us</Title>
+            <Title>About Us</Title>
           </Body>
           <Right />
         </Header>
 
+        <ImageBackground source={background} style={styles.aboutUsBg}>
         <Content padder>
           <View style={styles.center}>
           <Thumbnail Xlarge source={cover} style={styles.mb10} />
           </View>
           <View >
-            <Text style={[styles.mb10, styles.wordBold, styles.normalText ]}>Me.Organized</Text>
-            <Text style={[styles.mb50,styles.normalText, styles.normalText]}> Very simple To-do list Application {"\n"} built for Android and iOs users. {"\n"}Hope you enjoy</Text>
-            <Text style={[styles.mb35, styles.wordBold, styles.normalText ]}>Meet the team</Text>
+            <Text style={styles.companyName}>Me.Organized</Text>
+            <Text style={styles.description}> Very simple To-do list Application {"\n"} built for Android and iOS users. {"\n"}Hope you enjoy</Text>
+            <Text style={styles.meetTheTeam}>Meet the team</Text>
     
             <List
             dataArray={datas}
             renderRow={data =>
               <ListItem thumbnail>
                 <Left>
-                  <Thumbnail mediumTeam source={data.img} />
+                  <Thumbnail  mediumTeam source={data.img}  style={{marginBottom: 15}}/>
                 </Left>
                 <Body>
-                  <Text>
+                  <Text style={{fontSize: 18}}>
                     {data.text}
                   </Text>
-                  <Text numberOfLines={1} note>
+                  <Text style={{color: "white"}} note>
                     {data.note}
                   </Text>
                 </Body>
@@ -85,6 +91,7 @@ class AboutUs extends Component {
         
           </View>
         </Content>
+        </ImageBackground>
       </Container>
     );
   }

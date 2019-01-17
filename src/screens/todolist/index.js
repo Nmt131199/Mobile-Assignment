@@ -19,6 +19,7 @@ import {
 } from "native-base";
 import styles from "./styles";
 
+const background = require("../../../assets/todo_bg.jpg");
 const datas = [
   {
     text: "Go to supermarket",
@@ -58,12 +59,12 @@ class TodoList extends Component {
               transparent
               onPress={() => this.props.navigation.navigate("DrawerOpen")}
             >
-              <Icon name="menu" />
+              <Icon name="ios-menu" />
             </Button>
           </Left>
           
           <Body style={{ flex: 3 }}>
-            <Title>Todos</Title>
+            <Title>To Do List</Title>
           </Body>
           <Right></Right>
         </Header>

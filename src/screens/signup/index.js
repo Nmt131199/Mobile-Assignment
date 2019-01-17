@@ -29,23 +29,27 @@ class SignUp extends React.Component {
         <View style={styles.inputContainer}>
           <Form>
             <Item stackedLabel>
-              <Label>Fullname</Label>
+              <Label>First Name:</Label>
               <Input />
             </Item>
             <Item stackedLabel>
-              <Label>Email</Label>
+              <Label>Last Name:</Label>
+              <Input />
+            </Item>
+            <Item stackedLabel>
+              <Label>Email:</Label>
               <Input textContentType='emailAddress'/>
             </Item>
             <Item stackedLabel>
-              <Label>Phone number</Label>
+              <Label>Phone Number:</Label>
               <Input keyboardType= 'numeric'/>
             </Item>
             <Item stackedLabel>
-              <Label>Username</Label>
+              <Label>Username:</Label>
               <Input />
             </Item>
-            <Item stackedLabel last>
-              <Label>Password</Label>
+            <Item stackedLabel>
+              <Label>Password:</Label>
               <Input />
             </Item>
           </Form>
@@ -89,7 +93,10 @@ const styles = StyleSheet.create({
     opacity: 0.5
   },
   inputContainer: {
-    margin: 30,
+    marginLeft: 30,
+    marginRight: 30,
+    marginBottom: 20,
+    marginTop: 10,
     padding: 15,
     alignSelf: 'stretch',
     borderWidth: 1,
@@ -100,7 +107,6 @@ const styles = StyleSheet.create({
     width: WIDTH - 110,
     height: 45,
     borderRadius: 25,
-
     backgroundColor: '#ff8c66',
     justifyContent: 'center',
     alignSelf: 'center',
@@ -111,7 +117,6 @@ const styles = StyleSheet.create({
     width: WIDTH - 350,
     height: 20,
     borderRadius: 25,
-    
     justifyContent: 'center',
     marginTop: 5
   },

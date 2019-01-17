@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Image } from "react-native";
+import { Image, ImageBackground } from "react-native";
 import {
   Content,
   Text,
@@ -13,31 +13,31 @@ import {
 } from "native-base";
 import styles from "./style";
 
-const drawerCover = require("../../../assets/drawer-cover.png");
-const drawerImage = require("../../../assets/logo-kitchen-sink.png");
+const drawerCover = require("../../../assets/background.png");
+const drawerImage = require("../../../assets/DrawerLogo.png");
 const datas = [
   {
-    name: "Todos",
+    name: "To Do List",
     route: "TodoList",
-    icon: "flame",
+    icon: "ios-list-box",
     bg: "#cc0000",
   },
   {
-    name: "Profile",
+    name: "Your Profile",
     route: "NHProfile",
-    icon: "person",
+    icon: "ios-person",
     bg: "#cc0000",
   },
   {
-    name: "About us",
+    name: "About Us",
     route: "AboutUs",
-    icon: "logo-github",
+    icon: "ios-analytics",
     bg: "#cc0000",
   },
   {
-    name: "Logout",
+    name: "Sign out",
     route: "Login",
-    icon: "key",
+    icon: "ios-key",
     bg: "#48525D"
   }
 ];
@@ -56,24 +56,21 @@ class SideBar extends Component {
       <Container>
         <Content
           bounces={false}
-          style={{ flex: 1, backgroundColor: "#fff", top: -1 }}
-        >
+          style={{ flex: 1, backgroundColor: "#fff", top: -1 }}>
           <Image source={drawerCover} style={styles.drawerCover} />
           <Image square style={styles.drawerImage} source={drawerImage} />
-
           <List
             dataArray={datas}
             renderRow={data =>
               <ListItem
                 button
                 noBorder
-                onPress={() => this.props.navigation.navigate(data.route)}
-              >
+                onPress={() => this.props.navigation.navigate(data.route)}>
                 <Left>
                   <Icon
                     active
                     name={data.icon}
-                    style={{ color: "#777", fontSize: 26, width: 30 }}
+                    style={{ color: "#777", fontSize: 30, width: 30 }}
                   />
                   <Text style={styles.text}>
                     {data.name}
